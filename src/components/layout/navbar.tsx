@@ -211,6 +211,7 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
               >
                 Dashboard
               </Link>
+              <LanguageSwitcher />
               <Logout />
             </ul>
           </div>
