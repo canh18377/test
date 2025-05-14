@@ -1,21 +1,46 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getLocation } from './lib/getLocation';
+import { countryToLocale } from './lib/languageMap';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const privateRoutes = [
-    "/dashboard",
-    "/checkout",
-  ];
-  const publicRoutes = ["/login", "/register", "/reset-password", "/forget-password", "/change-password"];
 
-  // Helper function to check if path matches any route pattern
+  const privateRoutes = ["/dashboard", "/checkout"];
+  const publicRoutes = [
+    "/login",
+    "/register",
+    "/reset-password",
+    "/forget-password",
+    "/change-password"
+  ];
+
+  const { nextUrl: url, headers } = request;
+  const cookie = request.cookies;
+
+  let locale = cookie.get('locale')?.value;
+
+  if (!locale) {
+    let ip = headers.get('x-forwarded-for') || '127.0.0.1';
+    console.log(ip)
+    if (ip.includes(',')) ip = ip.split(',')[0];
+
+    const location = await getLocation(ip);
+    const country = location?.country || 'US';
+    locale = countryToLocale[country] || 'en';
+
+    const response = NextResponse.next();
+    response.cookies.set('locale', locale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,  // Lưu cookie trong 1 năm
+    });
+    return response;
+  }
+
   const matchesRoute = (path: string, routes: string[]) => {
     return routes.some(route => {
-      // Exact match
       if (route === path) return true;
-      // Check if path starts with route and next char is '/' or end of string
       if (route.endsWith('/')) {
         return path.startsWith(route);
       }
@@ -29,23 +54,21 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value || '';
   const from = request.cookies.get('from')?.value || "/dashboard";
 
-  // If the user is trying to access a private route without a token, redirect to login
   if (isPrivateRoute && !token) {
-    const fullUrl = path + request.nextUrl.search; // Combine pathname with query parameters
-    (await cookies()).set("from", fullUrl);
-    return NextResponse.redirect(new URL('/login', request.url));
+    const fullUrl = path + request.nextUrl.search; // Kết hợp pathname với query parameters
+    const response = NextResponse.redirect(new URL('/login', request.url));
+    response.cookies.set("from", fullUrl, { path: '/' });
+    return response;
   }
 
-  // If the user is trying to access a public route with a token, redirect to the 'from' URL
   if (isPublicRoute && token) {
     return NextResponse.redirect(new URL(from, request.url));
   }
 
-  // Security headers
   const response = NextResponse.next();
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('Referrer-Policy', 'strict-/origin-when-cross-origin');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
   return response;

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
     DropdownMenu,
@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
+
 const languages = [
     { code: "en", label: "English" },
     { code: "vi", label: "Tiếng Việt" },
@@ -21,6 +22,17 @@ const languages = [
 export function LanguageSwitcher() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
+    const [currentLang, setCurrentLang] = useState<string>('en');
+
+    useEffect(() => {
+        const localeCookie = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('locale='))
+            ?.split('=')[1];
+        if (localeCookie) {
+            setCurrentLang(localeCookie);
+        }
+    }, []);
 
     const handleLanguageChange = (locale: string) => {
         document.cookie = `locale=${locale}; path=/`;
@@ -33,7 +45,7 @@ export function LanguageSwitcher() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
-                    🌐 Language
+                    🌐 {languages.find(l => l.code === currentLang)?.label || 'Language'}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

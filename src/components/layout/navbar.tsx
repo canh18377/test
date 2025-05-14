@@ -113,11 +113,13 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
             <LanguageSwitcher />
           </div>
 
-          <div className="block lg:hidden">
-            <div>
+          <div className="block lg:hidden flex items-center">
+            <LanguageSwitcher />
+            <div className="ml-4">
               <Menu role="button" onClick={() => setOpen(true)} />
             </div>
           </div>
+
         </div>
       </div>
       <div
@@ -211,7 +213,6 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
               >
                 Dashboard
               </Link>
-              <LanguageSwitcher />
               <Logout />
             </ul>
           </div>
