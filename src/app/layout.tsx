@@ -13,7 +13,8 @@ import UnderConstruction from "@/components/molecule/under-construction";
 import { Toaster as ToasterSonner } from "sonner";
 import { cookies } from "next/headers";
 import { CalDotComProvider, DataLayerProvider, TagManagerProvider } from "@/lib/scripts";
-
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -44,9 +45,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const token = (await cookies())?.get("token")?.value;
+  const locale = await getLocale();
 
   return (
-    <html lang="en">
+    <html lang="locale">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <DataLayerProvider />
@@ -54,17 +56,19 @@ export default async function RootLayout({
       </head>
 
       <body className={`${poppins.className} ${lato.variable}`}>
-        <TagManagerProvider />
-        <PageView />
-        <UnderConstruction />
-        <Navbar token={token} />
-        <main className="overflow-hidden">{children}</main>
-        <SpeedInsights />
-        <Toaster />
-        <ToasterSonner />
-        <WhatsApp />
-        <GotoTop />
-        <Footer />
+        <NextIntlClientProvider>
+          <TagManagerProvider />
+          <PageView />
+          <UnderConstruction />
+          <Navbar token={token} />
+          <main className="overflow-hidden">{children}</main>
+          <SpeedInsights />
+          <Toaster />
+          <ToasterSonner />
+          <WhatsApp />
+          <GotoTop />
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

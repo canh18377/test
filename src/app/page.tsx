@@ -11,22 +11,22 @@ import {
 import HeroSection from "./_utils/herosection";
 import Faq from "./_utils/faq";
 import { BrandCarousel } from "./_utils/carousel";
+import { useTranslations } from 'next-intl';
 
 const HomePage = () => {
+  const t = useTranslations('HomePage');
+
   return (
     <main>
       <HeroSection
         H1={
           <>
-            We Craft <span>Solution</span> on Demand to Go Online and Grow
-            Business
+            <span dangerouslySetInnerHTML={{ __html: t('heroTitle') }} />
           </>
         }
         P={
           <>
-            Being a dedicated digital agency, Sociomatic specializes in Google
-            Analytics, Ads Campaigns, Web Development, and extensive maintenance
-            with 3x-4x ROI
+            {t('heroDescription')}
           </>
         }
         videoLink="https://www.youtube.com/embed/04pWB5aj-DE?si=KhMa8PqMC6WmL_K1"

@@ -5,18 +5,21 @@ import Quality from "@/components/assets/quality";
 import ProcessCard from "@/components/molecule/process-card";
 import SectionHead from "@/components/molecule/section-head";
 import { ReactElement } from "react";
+import { useTranslations } from 'next-intl';
 
 const OurProcess = () => {
+  const t = useTranslations('HomePage');
+
   return (
     <section className="bg-muted">
       <div className="bg-[url('/images/backgrounds/ProcessBackgrid.svg')] bg-center bg-cover">
         <div className="container section">
           <SectionHead
             highlighter="Our Process"
-            H2={<>Why should you hire us?</>}
+            H2={<>{t("OurProcess.title")}</>}
             paragraphs={[
               <>
-                You Should hire us for <span>3 reasons</span>
+                {t("OurProcess.paragraph")}
               </>,
             ]}
           />

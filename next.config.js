@@ -1,3 +1,6 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
     siteKey: "6LdMJA4pAAAAADYN5E_ZP-FU3Wf5CEXol4y8Oriu",
@@ -34,4 +37,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

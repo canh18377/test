@@ -1,0 +1,35 @@
+{
+    "HomePage": {
+        "heroTitle": "We Craft a <span>Solution</span> on Demand to Go Online and Grow Business",
+        "heroDescription": "Being a dedicated digital agency, Sociomatic specializes in Google Analytics, Ads Campaigns, Web Development, and extensive maintenance with 3x-4x ROI",
+        "OurServices": {
+            "highlighter": "Our Services",
+            "title": "Understanding Your Business",
+            "paragraph": "We'll listen to your goals and complete a free audit to discover if we're a great fit to work with each other."
+        },
+        "OurProcess": {
+            "highlighter": "Our Process",
+            "title": "Why should you hire us?",
+            "paragraph": "You should hire us for 3 reasons",
+            "cards": [
+                {
+                    "title": "Proven Expertise Worldwide",
+                    "details": "Trusted by clients across the globe, we've delivered 700+ successful projects with 500+ glowing feedbacks. Our results-driven approach ensures your business gets the growth it deserves."
+                },
+                {
+                    "title": "Unmatched ROI Performance",
+                    "details": "Our tailored strategies consistently drive 3x-4x ROI. From scaling sales/leads to optimizing costs, we deliver real growth backed by data. We build websites that not only captivate your audience but also convert visitors into loyal customers, ensuring measurable growth for your business."
+                },
+                {
+                    "title": "Your Dedicated Growth Partner",
+                    "details": "We're not just service providers; we're partners in your success. Count on us for personalized solutions, ongoing support, and a relentless focus on scaling your business."
+                }
+            ]
+        },
+        "ProjectIdea": {
+            "title": "Have Any Project Idea?",
+            "description": "Let's discuss about your offshore project. We can help you with our skillful global team. You can take a free counseling session by scheduling a time.",
+            "button": "Get Started"
+        }
+    }
+}

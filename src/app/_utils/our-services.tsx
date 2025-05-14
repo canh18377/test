@@ -2,19 +2,19 @@ import ANIM__FadeInOutOnScroll from "@/components/anims/fadein.anim";
 import FeatureCard from "@/components/molecule/feature-card";
 import LinkButton from "@/components/molecule/link-button";
 import SectionHead from "@/components/molecule/section-head";
+import { useTranslations } from 'next-intl';
 
 const OurServices = ({ FeaturesData }: { FeaturesData: any }) => {
+  const t = useTranslations('HomePage');
   return (
     <section className="bg-[url('/images/backgrounds/SquareBackground.svg')] bg-center bg-cover">
       <div className="container section flex flex-col large-gap">
         <SectionHead
-          highlighter="Our Services"
-          H2={<>Understanding Your Business</>}
+          highlighter="Our Service"
+          H2={<>{t("OurServices.title")}</>}
           paragraphs={[
             <>
-              We&apos;ll listen to <span>your goals</span> and complete a free
-              audit to discover if we&apos;re a great fit to work with each
-              other.
+              {t("OurServices.paragraph")}
             </>,
           ]}
         />
