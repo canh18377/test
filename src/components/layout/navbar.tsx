@@ -18,7 +18,7 @@ import {
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import BrandLogo from "../assets/brandlogo";
-
+import { LanguageSwitcher } from "../molecule/LanguageSwitcher";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import GetAQuote from "../molecule/get-a-quote";
@@ -52,11 +52,10 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
                       {item.children ? (
                         <NavigationMenuItem>
                           <NavigationMenuTrigger
-                            className={`${
-                              pathname.includes(item.link)
-                                ? "text-secondary font-semibold"
-                                : "text-primary"
-                            }`}
+                            className={`${pathname.includes(item.link)
+                              ? "text-secondary font-semibold"
+                              : "text-primary"
+                              }`}
                           >
                             {item.text}
                           </NavigationMenuTrigger>
@@ -66,11 +65,10 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
                                 <a
                                   key={child.id}
                                   href={child.link}
-                                  className={`text-primary hover:text-secondary [&>*]:text-xs ${
-                                    pathname === child.link
-                                      ? "text-secondary font-semibold"
-                                      : "text-primary"
-                                  }`}
+                                  className={`text-primary hover:text-secondary [&>*]:text-xs ${pathname === child.link
+                                    ? "text-secondary font-semibold"
+                                    : "text-primary"
+                                    }`}
                                 >
                                   {child.text}
                                 </a>
@@ -84,23 +82,21 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
                             href={item.link}
                             legacyBehavior
                             passHref
-                            className={`${
-                              pathname === "/"
-                                ? "text-secondary font-semibold"
-                                : pathname.includes(item.link)
+                            className={`${pathname === "/"
+                              ? "text-secondary font-semibold"
+                              : pathname.includes(item.link)
                                 ? "text-secondary font-semibold"
                                 : "text-primary"
-                            }`}
+                              }`}
                           >
                             <NavigationMenuLink
                               className={navigationMenuTriggerStyle()}
                             >
                               <span
-                                className={`hover:text-secondary ${
-                                  pathname === item.link
-                                    ? "text-secondary font-semibold"
-                                    : "text-primary"
-                                }`}
+                                className={`hover:text-secondary ${pathname === item.link
+                                  ? "text-secondary font-semibold"
+                                  : "text-primary"
+                                  }`}
                               >
                                 {item.text}
                               </span>
@@ -114,6 +110,7 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
               </NavigationMenuList>
             </NavigationMenu>
             <NavActions token={token} />
+            <LanguageSwitcher />
           </div>
 
           <div className="block lg:hidden">
@@ -161,11 +158,10 @@ const Navbar = ({ token }: { token: string | undefined | null }) => {
                         onClick={(event: any) => event.stopPropagation()}
                       >
                         <CollapsibleTrigger
-                          className={`flex items-center justify-start small-gap ${
-                            pathname.includes(linkItem.link)
-                              ? "text-secondary font-semibold"
-                              : "text-primary"
-                          }`}
+                          className={`flex items-center justify-start small-gap ${pathname.includes(linkItem.link)
+                            ? "text-secondary font-semibold"
+                            : "text-primary"
+                            }`}
                         >
                           {linkItem.text}
                           <CaretSortIcon className="h-4 w-4" />

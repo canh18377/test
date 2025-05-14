@@ -57,6 +57,7 @@ export default async function RootLayout({
 
       <body className={`${poppins.className} ${lato.variable}`}>
         <NextIntlClientProvider>
+          kasb
           <TagManagerProvider />
           <PageView />
           <UnderConstruction />
