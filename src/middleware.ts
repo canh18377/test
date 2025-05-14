@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
 
   if (!locale) {
     let ip = headers.get('x-forwarded-for') || '127.0.0.1';
-    console.log(ip)
+    console.log("ip", ip)
     if (ip.includes(',')) ip = ip.split(',')[0];
 
     const location = await getLocation(ip);

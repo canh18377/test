@@ -36,6 +36,7 @@ export function LanguageSwitcher() {
 
     const handleLanguageChange = (locale: string) => {
         document.cookie = `locale=${locale}; path=/`;
+        setCurrentLang(locale)
         startTransition(() => {
             router.refresh();
         });
